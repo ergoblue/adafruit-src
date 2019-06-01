@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+	Documentation for this can be found under "Human Interface Device Profile"
+	at https://goo.gl/1N69Xd. Version 1.1.1 is the latest as of writing. The
+	attributes are defined on page 64 under "SDP Attribute Summary".
+-->
+
+<record>
+
+	<!-- Define service class with 0x1124 representing HID device service. --> 
+	<attribute id="0x0001">
+		<sequence>
+			<uuid value="0x1124" />
+		</sequence>
+	</attribute>
+
+	<!--
+		Define protocol list with 0x100 representing L2CAP, the first 0x11 for
+		the HID control port, and the second 0x11 for the HID protocol.
+	 --> 
+	<attribute id="0x0004">
+		<sequence>
+			<sequence>
+				<uuid value="0x0100" />
+				<uint16 value="0x0011" />
+			</sequence>
+			<sequence>
+				<uuid value="0x0011" />
+			</sequence>
+		</sequence>
+	</attribute>
+
+	<!--
+		Define additional protocol with 0x100 representing L2CAP, 0x13 for the
+		HID interrupt port, and 0x11 for the HID protocol.
+	--> 
+	<attribute id="0x000d">
+		<sequence>
+			<sequence>
+				<sequence>
+					<uuid value="0x0100" />
+					<uint16 value="0x0013" />
+				</sequence>
+				<sequence>
+					<uuid value="0x0011" />
+				</sequence>
+			</sequence>
+		</sequence>
+	</attribute>
+
+	<!--
+		Define BluetoothProfileDescriptorList. See values under "SDP Transaction
+		Examples".
+	-->
+	<attribute id="0x0009">
+		<sequence>
+			<sequence>
+				<uuid value="0x1124" />
+				<uint16 value="0x0101" />
+			</sequence>
+		</sequence>
+	</attribute>
+
+	<!--
+		Define LanguageBaseAttributeIDL. See values under "Example String
+		Attributes". This defines English with UTF-8.
+	-->
+	<attribute id="0x0006">
+		<sequence>
+			<uint16 value="0x656e" />
+			<uint16 value="0x006a" />
+			<uint16 value="0x0100" />
+		</sequence>
+	</attribute>
+
+	<!-- Define HIDParserVersion, with 0x0111 representing version 1.1.1. -->
+	<attribute id="0x0201">
+		<uint16 value="0x0111" />
+	</attribute>
+
+	<!--
+		Define HIDDeviceSubclass, with the 6th bit set to designate a keyboard.
+	-->
+	<attribute id="0x0202">
+		<uint8 value="0x40" />
+	</attribute>
+
+	<!--
+		Define HIDCountryCode. Per documentation, "Bluetooth HID devices are not
+		required to place a value other than zero in this field".
+	-->
+	<attribute id="0x0203">
+		<uint8 value="0x00" />
+	</attribute>
+
+	<!--
+		Set HIDVirtualCable and HIDReconnectInitiate. According to the HID
+		documentations, these two along with HIDNormallyConnectable can be used
+		to initiate the Bluetooth connection from the peripheral. We have yet to
+		get that working.
+	-->
+	<attribute id="0x0204">
+		<boolean value="false" />
+	</attribute>
+	<attribute id="0x0205">
+		<boolean value="false" />
+	</attribute>
+
+	<!-- Define HID report. -->
+	<attribute id="0x0206">
+		<sequence>
+			<sequence>
+				<uint8 value="0x22" />
+				<text encoding="hex" value="{{.}}" />
+			</sequence>
+		</sequence>
+	</attribute>
+
+	<!--
+		Define HIDLANGIDBaseList. See values under "Example String Attributes".
+		This defines English (United States).
+	--> 
+	<attribute id="0x0207">
+		<sequence>
+			<sequence>
+				<uint16 value="0x0409" />
+				<uint16 value="0x0100" />
+			</sequence>
+		</sequence>
+	</attribute>
+
+	<!-- Use HIDNormallyConnectable to designate that the device is always in page scan mode. -->
+	<attribute id="0x020d">
+		<boolean value="true" />
+	</attribute>
+
+	<!-- Designate that device does not support the boot protocol. -->
+	<attribute id="0x020e">
+		<boolean value="false" />
+	</attribute>
+
+</record>
